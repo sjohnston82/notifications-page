@@ -1,10 +1,13 @@
 ---
+import Notification from "../components/Notification.astro";
+import NotificationsBar from "../components/NotificationsBar";
 import NotificationsLayout from "../layouts/NotificationsLayout.astro";
 ---
 
 <NotificationsLayout>
-	<main class="w-[100%] h-[100dvh]">
-		<h1 class="text-[16px] font-plusjakartasans ">Notifications</h1>
+	<main class="w-[100%] h-[100dvh] px-6">
+		<NotificationsBar />
+		<Notification unread={true} name="Mark Webber" type="post-reaction" time="1m ago" avatar="/avatar-mark-webber.webp" postName="My first tournament today!" />
 	</main>
 </NotificationsLayout>
 		
