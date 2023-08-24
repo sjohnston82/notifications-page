@@ -15,20 +15,25 @@ interface Props {
   message?: string;
   time: string;
   postName?: string;
+  commentedPicture?: string;
  }
-const { unread, type, name, avatar, message = "", time, postName } = Astro.props;
+const { unread, type, name, avatar, message = "", time, postName, commentedPicture } = Astro.props;
 ---
 
-<div class={cn("flex gap-3", {
-  "bg-very-light-grayish-blue rounded": unread
+<div class={cn("flex gap-3 px-3 leading-tight justify-between py-3 font-plusjakartasans", {
+  "bg-very-light-grayish-blue rounded-xl": unread
 })}>
-  <div class="flex justify-start items-start">
-    <img src={avatar} alt={name} class=""/>
+  <div class="flex justify-start items-start ">
+    <img src={avatar} alt={name} class=" "/>
 
   </div>
-  <div class="flex flex-col">
+  <div class="flex flex-col flex-1">
   
   {type === "post-reaction" && <p class=""
-  ><span class="font-bold">{name}</span> reacted to your recent post <span class="font-bold text-dark-grayish-blue">{postName}</span>{unread && <span class="inline-flex align-text-top mt-[7px] ml-1 h-2 w-2 bg-primary-red rounded-full"></span>}</p>}
+  ><span class="font-bold">{name}</span> reacted to your recent post <span class="font-[500] text-dark-grayish-blue">{postName}</span>{unread && <span class="inline-flex align-text-top mt-[7px] ml-1 h-2 w-2 bg-primary-red rounded-full"></span>}</p>}
+
+  {type === "follow" && <p class=""><span class="font-bold">{name}</span> followed you {unread && <span class="inline-flex align-text-top mt-[7px] ml-1 h-2 w-2 bg-primary-red rounded-full"></span>} </p>}
+
+  {type === "joined" && <p class=""><span class="font-bold">{name}</span> has joined your group <span class="text-primary-blue font-bold font-plusjakartasans">Chess Club</span>{unread && <span class="inline-flex align-text-top mt-[7px] ml-1 h-2 w-2 bg-primary-red rounded-full"></span>}</p>}
   <p class="">{time}</p>
 </div>

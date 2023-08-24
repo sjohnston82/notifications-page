@@ -2,12 +2,19 @@
 import Notification from "../components/Notification.astro";
 import NotificationsBar from "../components/NotificationsBar";
 import NotificationsLayout from "../layouts/NotificationsLayout.astro";
+import { $notifications } from '../store/notifications'
+
+
+const notifications = $notifications.value;
+
 ---
 
 <NotificationsLayout>
-	<main class="w-[100%] h-[100dvh] px-6">
-		<NotificationsBar />
-		<Notification unread={true} name="Mark Webber" type="post-reaction" time="1m ago" avatar="/avatar-mark-webber.webp" postName="My first tournament today!" />
+	<main class="w-[100%] h-[100dvh] px-4">
+		<NotificationsBar client:load />
+		<div class="flex flex-col gap-6">
+			{notifications?.map((notification) => <Notification client:load name={notification.name} type={notification.type} time={notification.time} postName={notification.postName} commentedPicture={notification.commentedPicture} avatar={notification.avatar} unread={notification.unread} />)}
+		</div>
 	</main>
 </NotificationsLayout>
 		
