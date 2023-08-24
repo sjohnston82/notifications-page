@@ -1,6 +1,6 @@
-import { atom, computed } from "nanostores";
+import { atom, computed, map } from "nanostores";
 
-type Notification = {
+export type Notification = {
   name: string;
   type:
     | "post-reaction"
@@ -17,7 +17,7 @@ type Notification = {
   unread: boolean;
 };
 
-export const notification = atom<Notification>({
+export const notification = map<Notification>({
   name: "",
   type: "post-reaction",
   avatar: "",
@@ -28,7 +28,7 @@ export const notification = atom<Notification>({
   unread: false
 });
 
-export const $notifications = atom<Notification[]>([
+export const $notifications = map<Notification[]>([
   {
     name: "Mark Webber",
     type: "post-reaction",
@@ -103,3 +103,8 @@ export const $notifications = atom<Notification[]>([
 ]);
 
 export const $unreadLength = computed($notifications, n => n.filter(i => i.unread))
+
+// export function markRead(n: Notification[]) {
+//   n.map((n: Notification) => n.setKey("unread", false))
+// }
+

@@ -20,20 +20,27 @@ interface Props {
 const { unread, type, name, avatar, message = "", time, postName, commentedPicture } = Astro.props;
 ---
 
-<div class={cn("flex gap-3 px-3 leading-tight justify-between py-3 font-plusjakartasans", {
+<div class={cn("flex gap-3 p-3 text-[14px] leading-normal   font-plusjakartasans", {
   "bg-very-light-grayish-blue rounded-xl": unread
 })}>
-  <div class="flex justify-start items-start ">
-    <img src={avatar} alt={name} class=" "/>
+  <div class="flex justify-start ">
+    <img src={avatar} alt={name} class="w-[50px] h-[50px] "/>
 
   </div>
   <div class="flex flex-col flex-1">
   
   {type === "post-reaction" && <p class=""
-  ><span class="font-bold">{name}</span> reacted to your recent post <span class="font-[500] text-dark-grayish-blue">{postName}</span>{unread && <span class="inline-flex align-text-top mt-[7px] ml-1 h-2 w-2 bg-primary-red rounded-full"></span>}</p>}
+  ><span class="font-bold">{name}</span> reacted to your recent post  <span class="font-[700] text-dark-grayish-blue">&nbsp;{postName}</span>&nbsp;{unread && <span class="inline-flex align-text-top mt-[7px] ml-1 h-2 w-2 bg-primary-red rounded-full"></span>}</p>}
 
   {type === "follow" && <p class=""><span class="font-bold">{name}</span> followed you {unread && <span class="inline-flex align-text-top mt-[7px] ml-1 h-2 w-2 bg-primary-red rounded-full"></span>} </p>}
 
-  {type === "joined" && <p class=""><span class="font-bold">{name}</span> has joined your group <span class="text-primary-blue font-bold font-plusjakartasans">Chess Club</span>{unread && <span class="inline-flex align-text-top mt-[7px] ml-1 h-2 w-2 bg-primary-red rounded-full"></span>}</p>}
-  <p class="">{time}</p>
+  {type === "joined" && <p class=""><span class="font-bold">{name}</span> has joined your group &nbsp; <span class="text-primary-blue font-bold font-plusjakartasans">Chess Club</span>&nbsp;{unread && <span class="inline-flex align-text-top mt-[7px] ml-1 h-2 w-2 bg-primary-red rounded-full"></span>}</p>}
+
+  {type === "message" && <div class=""><p class=""
+  ><span class="font-bold">{name}</span>&nbsp; sent you a private message</p><p class="">{time}</p><div class="mt-2 border border-light-grayish-blue rounded p-3"><p class="text-dark-grayish-blue">{message}</p></div></div>}
+  
+  {type === "picture-comment" && <div class="flex gap-3"><div class="flex flex-col gap-1"><p class=""><span class="font-bold">{name}</span>&nbsp; commented on your picture</p><p class="">{time}</p></div><img src={commentedPicture} alt="Photo comment" class="w-[40px] h-[40px] " /></div>}
+
+  {type === "left" && <p class=""><span class="font-bold">{name}</span>&nbsp; left the group &nbsp; <span class="text-primary-blue font-bold font-plusjakartasans">Chess Club</span>&nbsp;</p>} 
+  {type !== "message" && type !== "picture-comment" && <p class="">{time}</p>}
 </div>
