@@ -24,10 +24,10 @@ const NotificationsBar = ({ notifications }: NotificationsBarProps) => {
   const unreadAmount = notificationState?.filter((notification) => notification.unread).length
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-white lg:py-4 lg:px-5 lg:my-8 lg:rounded-xl lg:shadow-xl lg:w-[43%]">
       <div className="flex justify-between font-plusjakartasans mt-6 mb-8">
         <div className="flex gap-2">
-          <h1 className="font-[800] text-[18px] tracking-tight">
+          <h1 className="font-[800] text-[18px] lg:text-[22px] tracking-tight">
             Notifications
           </h1>
           <div className="bg-primary-blue text-white px-3 py-1 font-semibold rounded-lg">
@@ -35,7 +35,7 @@ const NotificationsBar = ({ notifications }: NotificationsBarProps) => {
           </div>
         </div>
         <div className="">
-          <p onClick={() => setMarkAsRead()} className="text-dark-grayish-blue">
+          <p onClick={() => setMarkAsRead()} className="text-dark-grayish-blue lg:text-sm hover:text-primary-blue cursor-pointer">
             Mark all as read
           </p>
         </div>

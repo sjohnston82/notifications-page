@@ -106,10 +106,10 @@ const NotificationContainer = ({
         )}
 
         {type === "picture-comment" && (
-          <div className="flex gap-3">
+          <div className="flex gap-3 lg:justify-between">
             <div className="flex flex-col gap-1">
               <p className="">
-                <span className="font-bold cursor-pointer hover:text-primary-blue">
+                <span className="font-bold cursor-pointer hover:text-grayish-blue">
                   {name}
                 </span>
                 &nbsp; commented on your picture
