@@ -1,5 +1,5 @@
 ---
-import Notification from "../components/Notification.astro";
+import Notification from "../components/NotificationContainer";
 import NotificationsBar from "../components/NotificationsBar";
 import NotificationsLayout from "../layouts/NotificationsLayout.astro";
 import { $notifications } from '../store/notificationsStore'
@@ -11,14 +11,14 @@ const notifications = $notifications.value;
 
 <NotificationsLayout>
 	<main class="w-[100%] h-[100dvh] px-4">
-		<NotificationsBar client:load />
-		<div class="flex flex-col gap-6 pb-8">
-			{notifications?.map((notification) => <Notification  name={notification.name} type={notification.type} time={notification.time} postName={notification.postName} commentedPicture={notification.commentedPicture} avatar={notification.avatar} unread={notification.unread} message={notification.message} />)}
-		</div>
+		<meta charset="utf-8">
+		<NotificationsBar notifications={notifications} client:load />
+		<!-- <div class="flex flex-col gap-6 pb-8">
+			{notifications?.map((notification) => <Notification  {...notification} />)}
+		</div> -->
 	</main>
 </NotificationsLayout>
 		
 
 
 
-../store/notificationsStore

@@ -25,7 +25,7 @@ export const notification = map<Notification>({
   postName: "",
   commentedPicture: "",
   message: "",
-  unread: false
+  unread: false,
 });
 
 export const $notifications = map<Notification[]>([
@@ -102,9 +102,13 @@ export const $notifications = map<Notification[]>([
   },
 ]);
 
-export const $unreadLength = computed($notifications, n => n.filter(i => i.unread))
+export const $unreadLength = computed($notifications, (n) =>
+  n.filter((i) => i.unread)
+);
 
-// export function markRead(n: Notification[]) {
-//   n.map((n: Notification) => n.setKey("unread", false))
-// }
-
+export function markRead(ul: Notification[]) {
+  ul.forEach((n) => {
+    n.unread = false;
+    // console.log(n);
+  });
+}

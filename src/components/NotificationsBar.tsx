@@ -1,25 +1,49 @@
 import { $unreadLength, markRead } from "../store/notificationsStore";
 import { useStore } from "@nanostores/react";
 import type { Notification } from "../store/notificationsStore";
+import NotificationContainer from "./NotificationContainer";
+import { useState } from "react";
 
-const NotificationsBar = () => {
+type NotificationsBarProps = {
+  notifications: Notification[] | undefined;
+};
+
+const NotificationsBar = ({ notifications }: NotificationsBarProps) => {
   const unreadLength = useStore($unreadLength);
+  // console.log(unreadLength);
+  const [notificationState, setNotificationState] = useState(notifications);
+
+  const setMarkAsRead = () => {
+    const updatedNotifications = notificationState?.map((notification) =>
+      notification.unread ? { ...notification, unread: false } : notification
+    );
+
+    setNotificationState(updatedNotifications);
+  };
+
+  const unreadAmount = notificationState?.filter((notification) => notification.unread).length
 
   return (
-    <div className="flex justify-between font-plusjakartasans mt-6 mb-8">
-      <div className="flex gap-2">
-        <h1 className="font-[800] text-[18px]">Notifications</h1>
-        <div className="bg-primary-blue text-white px-3 py1 rounded-lg">
-          {unreadLength.length}
+    <div className="flex flex-col">
+      <div className="flex justify-between font-plusjakartasans mt-6 mb-8">
+        <div className="flex gap-2">
+          <h1 className="font-[800] text-[18px] tracking-tight">
+            Notifications
+          </h1>
+          <div className="bg-primary-blue text-white px-3 py-1 font-semibold rounded-lg">
+            {unreadAmount}
+          </div>
+        </div>
+        <div className="">
+          <p onClick={() => setMarkAsRead()} className="text-dark-grayish-blue">
+            Mark all as read
+          </p>
         </div>
       </div>
-      <div className="">
-        <p
-          onClick={() => markRead(unreadLength)}
-          className="text-dark-grayish-blue"
-        >
-          Mark all as read
-        </p>
+      <div className="flex flex-col gap-6 pb-8">
+        {notificationState?.map((notification, i) => (
+          <NotificationContainer key={i} {...notification} />
+        ))}
       </div>
     </div>
   );
