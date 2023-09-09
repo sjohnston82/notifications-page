@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -33,11 +33,6 @@ const NotificationContainer = ({
   postName,
   commentedPicture,
 }: Props) => {
-
-
-
-
-
   return (
     <div
       className={cn(
@@ -53,9 +48,11 @@ const NotificationContainer = ({
       <div className="flex flex-col flex-1">
         {type === "post-reaction" && (
           <p className="">
-            <span className="font-bold">{name}&nbsp;</span> reacted to your
-            recent post{" "}
-            <span className="font-[700] text-dark-grayish-blue">
+            <span className="font-bold cursor-pointer hover:text-primary-blue">
+              {name}&nbsp;
+            </span>{" "}
+            reacted to your recent post{" "}
+            <span className="font-[700] text-dark-grayish-blue cursor-pointer hover:text-primary-blue">
               &nbsp;{postName}
             </span>
             &nbsp;
@@ -67,7 +64,10 @@ const NotificationContainer = ({
 
         {type === "follow" && (
           <p className="">
-            <span className="font-bold">{name}&nbsp;</span> followed you{" "}
+            <span className="font-bold cursor-pointer hover:text-primary-blue">
+              {name}&nbsp;
+            </span>{" "}
+            followed you{" "}
             {unread && (
               <span className="inline-flex align-text-top mt-[7px] ml-1 h-2 w-2 bg-primary-red rounded-full"></span>
             )}{" "}
@@ -76,9 +76,11 @@ const NotificationContainer = ({
 
         {type === "joined" && (
           <p className="">
-            <span className="font-bold">{name}&nbsp;</span> has joined your
-            group &nbsp;{" "}
-            <span className="text-primary-blue font-bold font-plusjakartasans">
+            <span className="font-bold cursor-pointer hover:text-primary-blue">
+              {name}&nbsp;
+            </span>{" "}
+            has joined your group &nbsp;{" "}
+            <span className="text-primary-blue cursor-pointer font-bold font-plusjakartasans">
               Chess Club
             </span>
             &nbsp;
@@ -91,12 +93,14 @@ const NotificationContainer = ({
         {type === "message" && (
           <div className="">
             <p className="">
-              <span className="font-bold">{name}</span>&nbsp; sent you a private
-              message
+              <span className="font-bold cursor-pointer hover:text-primary-blue">
+                {name}
+              </span>
+              &nbsp; sent you a private message
             </p>
             <p className="">{time}</p>
-            <div className="mt-2 border border-light-grayish-blue rounded p-3">
-              <p className="text-dark-grayish-blue">{message}</p>
+            <div className="mt-2 border hover:bg-light-grayish-blue-1 cursor-pointer border-light-grayish-blue rounded p-3">
+              <p className="">{message}</p>
             </div>
           </div>
         )}
@@ -105,24 +109,28 @@ const NotificationContainer = ({
           <div className="flex gap-3">
             <div className="flex flex-col gap-1">
               <p className="">
-                <span className="font-bold">{name}</span>&nbsp; commented on
-                your picture
+                <span className="font-bold cursor-pointer hover:text-primary-blue">
+                  {name}
+                </span>
+                &nbsp; commented on your picture
               </p>
               <p className="">{time}</p>
             </div>
             <img
               src={commentedPicture}
               alt="Photo comment"
-              className="w-[40px] h-[40px] "
+              className="w-[40px] h-[40px] cursor-pointer "
             />
           </div>
         )}
 
         {type === "left" && (
           <p className="">
-            <span className="font-bold">{name}</span>&nbsp; left the group
-            &nbsp;{" "}
-            <span className="text-primary-blue font-bold font-plusjakartasans">
+            <span className="font-bold cursor-pointer hover:text-primary-blue">
+              {name}
+            </span>
+            &nbsp; left the group &nbsp;{" "}
+            <span className="text-primary-blue font-bold font-plusjakartasans cursor-pointer">
               Chess Club
             </span>
             &nbsp;
@@ -134,6 +142,6 @@ const NotificationContainer = ({
       </div>
     </div>
   );
-}
+};
 
 export default NotificationContainer;
